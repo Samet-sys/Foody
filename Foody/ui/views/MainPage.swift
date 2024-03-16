@@ -10,8 +10,7 @@ import Kingfisher
 import RxSwift
 
 class MainPage: UIViewController {
-    
-   
+  
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var foodsCollectionView: UICollectionView!
@@ -43,7 +42,9 @@ class MainPage: UIViewController {
         
         _ = favoritesPageViewModel.FavFoodsList.subscribe(onNext: { list in
             self.favFoods = list
-            
+            DispatchQueue.main.async {
+                self.foodsCollectionView.reloadData()
+            }
         })
         
         
@@ -130,12 +131,12 @@ extension MainPage : UISearchBarDelegate{
 }
 
 extension MainPage : UICollectionViewDelegate, UICollectionViewDataSource{
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return foodsList.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let foodlist = foodsList[indexPath.row]
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foods_cell", for: indexPath) as! FoodsCell
         if let url = URL(string: "http://kasimadalan.pe.hu/yemekler/resimler/\(foodlist.food_pic_name!)") {
             DispatchQueue.main.async {
@@ -157,6 +158,7 @@ extension MainPage : UICollectionViewDelegate, UICollectionViewDataSource{
                 cell.favoriteStatue = .selected
                 cell.addToFavoritesButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
                 cell.addToFavoritesButton.tintColor = UIColor(named: "Main")
+                break
             }else{
                 cell.favoriteStatue = .nonSelected
                 cell.addToFavoritesButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -167,6 +169,7 @@ extension MainPage : UICollectionViewDelegate, UICollectionViewDataSource{
         
         cell.selectedFood = foodlist
         cell.favFoods = favFoods
+        
         return cell
     }
     
@@ -175,6 +178,7 @@ extension MainPage : UICollectionViewDelegate, UICollectionViewDataSource{
         performSegue(withIdentifier: "detailsPage", sender: food)
         
     }
+    
 }
 
 

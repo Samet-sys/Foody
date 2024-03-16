@@ -27,7 +27,7 @@ class CartPageViewModel{
     func deleteCartItem(user_name:String, cart_food_id:Int){
         foodsRepo.deleteCartItem(user_name: user_name, cart_food_id: cart_food_id)
         
-        cartFoodsList = foodsRepo.cartFoodsList
+        //cartFoodsList = foodsRepo.cartFoodsList
         //Note: Changes in cartFoodsList is observed in REPO and assigned those changes here only when init method is called. So we have to get new changes from REPO every changes happened. That's why we assign cartFoodsList = foodsRepo.cartFoodsList
         
     }

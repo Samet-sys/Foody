@@ -8,12 +8,15 @@
 import UIKit
 import Cosmos
 
+protocol Star{
+    func changeStar()
+}
 
 enum Favorite{
     case selected
     case nonSelected
 }
-class FoodsCell: UICollectionViewCell {
+class FoodsCell: UICollectionViewCell, Star {
     
     @IBOutlet weak var cellLabel: UILabel!
     @IBOutlet weak var cellImageView: UIImageView!
@@ -24,21 +27,25 @@ class FoodsCell: UICollectionViewCell {
     var foodsRepo = FoodsDaoRespository()
     var selectedFood:Foods?
     var favFoods:[Foods]?
+    var favCell = FavouritesCell()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupGradientBackground()
         setupRoundedCorners()
-        
+        favCell.delegate = self // bunlar olmadan da işe yarıyor ??
         
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupGradientBackground()
-        
+        favCell.delegate = self
     }
     
-    
+    func changeStar() {
+        favoriteStatue = .nonSelected
+        
+    }
  
      //--- configure overview stars ---
      override public func prepareForReuse() {
@@ -87,7 +94,7 @@ class FoodsCell: UICollectionViewCell {
                 for food in favFoods{
                    
                     if food.food_name! == selectedFood!.food_name{
-                        print(food.food_name!, selectedFood!.food_name!)
+                        
                         foodsRepo.deleteFavItem(food_id: food.food_id!)
                     }
                 }

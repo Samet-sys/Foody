@@ -15,6 +15,7 @@ class FavouritesCell: UITableViewCell {
     @IBOutlet weak var cellImageView: UIImageView!
     var foodsRepo = FoodsDaoRespository()
     var favFood:Foods?
+    var delegate:Star?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,6 +37,7 @@ class FavouritesCell: UITableViewCell {
     @IBAction func deleteButton(_ sender: Any) {
         if let favFood = favFood{
             foodsRepo.deleteFavItem(food_id: favFood.food_id!)
+            delegate?.changeStar()
         }
         //MARK: buradan silindiğinde anasayfadaki kalp işareti kalksın
     }

@@ -51,7 +51,6 @@ class CartPage: UIViewController , CheckButtonLabel {
         //--- checkout button price calculation(BEFORE BUTTON CONFIG) ---
         for i in 0..<cartFoods.count{
             if let price = Int(cartFoods[i].food_price!), let orderCount = Int(cartFoods[i].food_order_count!){
-                print("\(price) - \(cartFoods[i].food_name!) - \(orderCount)")
                 totalAmount += price * orderCount
             }
             

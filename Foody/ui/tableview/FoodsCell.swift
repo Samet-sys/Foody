@@ -8,14 +8,12 @@
 import UIKit
 import Cosmos
 
-protocol Star{
-    func changeStar()
-}
 
 enum Favorite{
     case selected
     case nonSelected
 }
+
 class FoodsCell: UICollectionViewCell, Star {
     
     @IBOutlet weak var cellLabel: UILabel!

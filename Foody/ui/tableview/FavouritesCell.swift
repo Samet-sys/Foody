@@ -7,15 +7,19 @@
 
 import UIKit
 
+protocol Star{
+    func changeStar()
+}
+
 class FavouritesCell: UITableViewCell {
-    
-   
     @IBOutlet weak var cellFoodNameLabel: UILabel!
     @IBOutlet weak var cellPriceLabel: UILabel!
     @IBOutlet weak var cellImageView: UIImageView!
+    
     var foodsRepo = FoodsDaoRespository()
     var favFood:Foods?
     var delegate:Star?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

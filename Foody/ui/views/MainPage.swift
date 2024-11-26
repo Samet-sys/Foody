@@ -20,6 +20,7 @@ class MainPage: UIViewController {
     var favFoods = [Foods]()
     var favoritesPageViewModel = FavoritesPageViewModel()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,9 +47,6 @@ class MainPage: UIViewController {
                 self.foodsCollectionView.reloadData()
             }
         })
-        
-        
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
